@@ -84,12 +84,30 @@ app.post('/restaurants', (req, res) => {
 
 //編輯餐廳介面
 app.get('/restaurants/:_id/edit', (req, res) => {
-  res.send('編輯餐廳')
+  Restaurant.findById(req.params._id, (err, restaurant) => {
+    if (err) return console.error(err)
+    return res.render('edit', { restaurant: restaurant })
+  })
 })
 
 //修改餐廳
 app.post('/restaurants/:_id/edit', (req, res) => {
-  res.send('修改餐聽')
+  Restaurant.findById(req.params._id, (err, restaurant) => {
+    if (err) return console.error(err)
+    restaurant.name = req.body.name
+    restaurant.category = req.body.category
+    restaurant.location = req.body.location
+    restaurant.phone = req.body.phone
+    restaurant.image = req.body.image
+    restaurant.google_map = req.body.google_map
+    restaurant.description = req.body.description
+    restaurant.rating = req.body.rating
+
+    restaurant.save(err => {
+      if (err) return console.error(err)
+      return res.redirect(`/restaurants/${req.params._id}`)
+    })
+  })
 })
 
 //刪除餐廳
