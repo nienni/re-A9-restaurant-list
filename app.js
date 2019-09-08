@@ -33,12 +33,15 @@ const Restaurant = require('./models/restaurant.js')
 //route
 //首頁
 app.get('/', (req, res) => {
-  return res.render('index')
+  Restaurant.find((err, restaurants) => {
+    if (err) return console.error(err)
+    return res.render('index', { restaurants: restaurants })
+  })
 })
 
 //列出全部餐聽
 app.get('/restaurants', (req, res) => {
-  res.send('列出所有餐廳')
+  res.redirect('/')
 })
 
 //新增一筆餐廳頁面
