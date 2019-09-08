@@ -11,6 +11,12 @@ const exphbs = require('express-handlebars')
 //load body-parser
 const bodyParser = require('body-parser')
 
+//load method override
+const methodOverride = require('method-override')
+
+//set method override
+app.use(methodOverride('_method'))
+
 //set body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -95,7 +101,7 @@ app.get('/restaurants/:_id/edit', (req, res) => {
 })
 
 //修改餐廳
-app.post('/restaurants/:_id/edit', (req, res) => {
+app.put('/restaurants/:_id/edit', (req, res) => {
   Restaurant.findById(req.params._id, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.name = req.body.name
@@ -115,7 +121,7 @@ app.post('/restaurants/:_id/edit', (req, res) => {
 })
 
 //刪除餐廳
-app.post('/restaurants/:_id/delete', (req, res) => {
+app.delete('/restaurants/:_id/delete', (req, res) => {
   Restaurant.findById(req.params._id, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.remove(err => {
