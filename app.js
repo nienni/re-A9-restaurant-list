@@ -56,8 +56,11 @@ app.get('/restaurants/new', (req, res) => {
 })
 
 //顯示一筆餐廳
-app.get('/restaurant/:_id', (req, res) => {
-  res.send('顯示一筆餐廳')
+app.get('/restaurants/:_id', (req, res) => {
+  Restaurant.findById(req.params._id, (err, restaurant) => {
+    if (err) return console.error(err)
+    res.render('detail', { restaurant: restaurant })
+  })
 })
 
 //新增一筆餐廳
@@ -80,7 +83,7 @@ app.post('/restaurants', (req, res) => {
 })
 
 //編輯餐廳介面
-app.get('/restaurant/:_id/edit', (req, res) => {
+app.get('/restaurants/:_id/edit', (req, res) => {
   res.send('編輯餐廳')
 })
 
@@ -90,7 +93,7 @@ app.post('/restaurants/:_id/edit', (req, res) => {
 })
 
 //刪除餐廳
-app.post('/restaurant/:_id/delete', (req, res) => {
+app.post('/restaurants/:_id/delete', (req, res) => {
   res.send('刪除餐廳')
 })
 
