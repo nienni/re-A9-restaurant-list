@@ -8,6 +8,12 @@ const mongoose = require('mongoose')
 //load express-handlebars
 const exphbs = require('express-handlebars')
 
+//load body-parser
+const bodyParser = require('body-parser')
+
+//set body-parser
+app.use(bodyParser.urlencoded({ extended: true }))
+
 //set express-handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -46,7 +52,7 @@ app.get('/restaurants', (req, res) => {
 
 //新增一筆餐廳頁面
 app.get('/restaurants/new', (req, res) => {
-  res.send('新增餐廳頁面')
+  res.render('new')
 })
 
 //顯示一筆餐廳
@@ -55,8 +61,22 @@ app.get('/restaurant/:_id', (req, res) => {
 })
 
 //新增一筆餐廳
-app.post('/restaurants/new', (req, res) => {
-  res.send('新增餐廳')
+app.post('/restaurants', (req, res) => {
+  const restaurant = new Restaurant({
+    name: req.body.name,
+    category: req.body.category,
+    location: req.body.location,
+    phone: req.body.phone,
+    image: req.body.image,
+    google_map: req.body.google_map,
+    description: req.body.description,
+    rating: req.body.rating,
+  })
+
+  restaurant.save(err => {
+    if (err) return console.error(err)
+    return res.redirect('/')
+  })
 })
 
 //編輯餐廳介面
