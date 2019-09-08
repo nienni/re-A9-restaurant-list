@@ -39,10 +39,14 @@ const Restaurant = require('./models/restaurant.js')
 //route
 //首頁
 app.get('/', (req, res) => {
-  Restaurant.find((err, restaurants) => {
-    if (err) return console.error(err)
-    return res.render('index', { restaurants: restaurants })
-  })
+  Restaurant.find({})
+    .sort({
+      name: 'asc'
+    })
+    .exec((err, restaurants) => {
+      if (err) return console.error(err)
+      return res.render('index', { restaurants: restaurants })
+    })
 })
 
 //列出全部餐聽
