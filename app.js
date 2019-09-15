@@ -14,6 +14,16 @@ const bodyParser = require('body-parser')
 //load method override
 const methodOverride = require('method-override')
 
+//load express-session
+const session = require('express-session')
+
+//set session
+app.use(session({
+  secret: 'your secret key',
+  resave: false,
+  saveUninitialized: true,
+}))
+
 //set method override
 app.use(methodOverride('_method'))
 
