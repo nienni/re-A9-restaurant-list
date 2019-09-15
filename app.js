@@ -16,6 +16,9 @@ const methodOverride = require('method-override')
 
 //load express-session
 const session = require('express-session')
+const passport = require('passport')
+
+
 
 //set session
 app.use(session({
@@ -23,6 +26,16 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+require('./config/passport')(passport)
+
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  next()
+})
 
 //set method override
 app.use(methodOverride('_method'))
