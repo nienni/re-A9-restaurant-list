@@ -2,6 +2,10 @@
 const express = require('express')
 const app = express()
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 //load mongoose
 const mongoose = require('mongoose')
 
@@ -72,6 +76,7 @@ app.use('/', require('./routes/home.js'))
 //load /restaurants routes
 app.use('/restaurants', require('./routes/restaurant.js'))
 app.use('/users', require('./routes/users'))
+app.use('/auth', require('./routes/auths'))
 
 //listen
 app.listen(3000, () => {
