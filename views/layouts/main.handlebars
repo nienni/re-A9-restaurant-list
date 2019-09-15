@@ -12,23 +12,28 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="bg-light">
   <header>
     <!-- navigation -->
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light justify-content-between">
       <div class="container">
         <a class="navbar-brand" href="/">
           <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
             width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
           我的餐廳清單
         </a>
+        <a href="/restaurants/new" class="btn btn-outline-dark">新增餐廳</a>
       </div>
     </nav>
 
     <div class="banner"></div>
   </header>
+  <main>
+    <div class="container mt-6">
+      {{{body}}}
+    </div>
+  </main>
 
-  {{{body}}}
 
   <!--load bootstrap js-->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
