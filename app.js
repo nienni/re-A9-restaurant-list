@@ -47,6 +47,7 @@ const Restaurant = require('./models/restaurant.js')
 app.use('/', require('./routes/home.js'))
 //load /restaurants routes
 app.use('/restaurants', require('./routes/restaurant.js'))
+app.use('/users', require('./routes/users'))
 
 //listen
 app.listen(3000, () => {
