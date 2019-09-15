@@ -7,7 +7,7 @@ const { authenticated } = require('../config/auth')
 //home route
 //首頁
 router.get('/', authenticated, (req, res) => {
-  Restaurant.find({})
+  Restaurant.find({ userId: req.user._id })
     .sort({
       name: 'asc'
     })
