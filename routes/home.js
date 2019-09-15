@@ -2,10 +2,11 @@
 const express = require('express')
 const router = express.Router()
 const Restaurant = require('../models/restaurant.js')
+const { authenticated } = require('../config/auth')
 
 //home route
 //首頁
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   Restaurant.find({})
     .sort({
       name: 'asc'
